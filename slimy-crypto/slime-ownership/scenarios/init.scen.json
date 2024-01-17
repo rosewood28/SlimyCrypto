@@ -1,0 +1,89 @@
+{
+    "name": "deploy slime ownership",
+    "gasSchedule": "dummy",
+    "steps": [
+        {
+            "step": "setState",
+            "accounts": {
+                "address:my_address": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                }
+            },
+            "newAddresses": [
+                {
+                    "creatorAddress": "address:my_address",
+                    "creatorNonce": "0",
+                    "newAddress": "sc:slime_genetic_alg"
+                },
+                {
+                    "creatorAddress": "address:my_address",
+                    "creatorNonce": "1",
+                    "newAddress": "sc:slime_ownership_contract"
+                }
+            ],
+            "currentBlockInfo": {
+                "blockTimestamp": "0"
+            }
+        },
+        {
+            "step": "scDeploy",
+            "id": "deploy - slime genetic alg contract",
+            "tx": {
+                "from": "address:my_address",
+                "contractCode": "file:../../slime-genetic-alg/output/slime-genetic-alg.wasm",
+                "arguments": [],
+                "gasLimit": "1,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scDeploy",
+            "id": "deploy - slime ownership contract",
+            "tx": {
+                "from": "address:my_address",
+                "contractCode": "file:../output/slime-ownership.wasm",
+                "arguments": [
+                    "sc:slime_genetic_alg"
+                ],
+                "gasLimit": "1,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:my_address": {
+                    "nonce": "2",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "sc:slime_ownership_contract": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {
+                        "str:geneScienceContractAddress": "sc:slime_genetic_alg",
+                        "str:totalSlimes": "1",
+                        "str:slime|u32:0": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0"
+                    },
+                    "code": "file:../output/slime-ownership.wasm"
+                },
+                "+": ""
+            }
+        }
+    ]
+}

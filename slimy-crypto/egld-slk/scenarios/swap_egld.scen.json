@@ -1,0 +1,94 @@
+{
+    "name": "swap egld",
+    "gasSchedule": "v4",
+    "steps": [
+        {
+            "step": "setState",
+            "accounts": {
+                "address:user": {
+                    "nonce": "0",
+                    "balance": "1000000000000000000"
+                },
+                "sc:egld_esdt_swap": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "esdt": {
+                        "str:SLK-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "",
+                                    "balance": "1"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        }
+                    },
+                    "storage": {
+                        "str:slimeTokenId": "str:SLK-abcdef"
+                    },
+                    "code": "file:../output/egld-slk-swap-sc.wasm"
+                }
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "swap-egld",
+            "tx": {
+                "from": "address:user",
+                "to": "sc:egld_esdt_swap",
+                "egldValue": "50000000000000000",
+                "function": "swapEgld",
+                "arguments": [],
+                "gasLimit": "5,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "nested:str:SLK-abcdef|u64:0|biguint:250"
+                ],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:user": {
+                    "nonce": "1",
+                    "balance": "950000000000000000",
+                    "esdt": {
+                        "str:SLK-abcdef": "250"
+                    },
+                    "storage": {}
+                },
+                "sc:egld_esdt_swap": {
+                    "nonce": "0",
+                    "balance": "50000000000000000",
+                    "esdt": {
+                        "str:SLK-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "",
+                                    "balance": "1"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        }
+                    },
+                    "storage": {
+                        "str:slimeTokenId": "str:SLK-abcdef"
+                    },
+                    "code": "file:../output/egld-slk-swap-sc.wasm"
+                }
+            }
+        }
+    ]
+}

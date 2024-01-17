@@ -1,0 +1,180 @@
+{
+    "name": "SLK Shop",
+    "gasSchedule": "v4",
+    "steps": [
+        {
+            "step": "setState",
+            "accounts": {
+                "address:user": {
+                    "esdt": {
+                        "str:SLK-abcdef": "10000"
+                    },
+                    "nonce": "0",
+                    "balance": "1"
+                },
+                "sc:slk_shop": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "esdt": {
+                        "str:CATCH-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "",
+                                    "balance": "1"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        },
+                        "str:ATT-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "",
+                                    "balance": "1"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        },
+                        "str:HP-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "",
+                                    "balance": "1"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        }
+                    },
+                    "storage": {
+                        "str:slimeTokenId": "str:SLK-abcdef",
+                        "str:attBuffTokenId": "str:ATT-abcdef",
+                        "str:healthPotTokenId": "str:HP-abcdef",
+                        "str:catcherTokenId": "str:CATCH-abcdef"
+                    },
+                    "code": "file:../output/slk-shop.wasm"
+                }
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "buy-catcher",
+            "tx": {
+                "from": "address:user",
+                "to": "sc:slk_shop",
+                "esdtValue": [{
+                    "tokenIdentifier": "str:SLK-abcdef",
+                    "value": "10"
+                }],
+                "function": "buyCatcher",
+                "arguments": [],
+                "gasLimit": "5,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "*"
+                ],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "buy-health-pot",
+            "tx": {
+                "from": "address:user",
+                "to": "sc:slk_shop",
+                "esdtValue": [{
+                    "tokenIdentifier": "str:SLK-abcdef",
+                    "value": "15"
+                }],
+                "function": "buyHealthPot",
+                "arguments": [],
+                "gasLimit": "5,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "*"
+                ],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "buy-att-buf",
+            "tx": {
+                "from": "address:user",
+                "to": "sc:slk_shop",
+                "esdtValue": [{
+                    "tokenIdentifier": "str:SLK-abcdef",
+                    "value": "15"
+                }],
+                "function": "buyATTBuff",
+                "arguments": [],
+                "gasLimit": "5,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "*"
+                ],
+                "status": "0",
+                "message": "",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:user": {
+                    "nonce": "3",
+                    "balance": "1",
+                    "esdt": {
+                        "str:CATCH-abcdef": "2"
+                    },
+                    "storage": {}
+                },
+                "sc:slk_shop": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "esdt": {
+                        "str:SLK-abcdef": {
+                            "instances": [
+                                {
+                                    "nonce": "0",
+                                    "balance": "40"
+                                }
+                            ],
+                            "roles": [
+                                "ESDTRoleLocalMint",
+                                "ESDTRoleLocalBurn"
+                            ]
+                        }
+                    },
+                    "storage": {
+                        "str:slimeTokenId": "str:SLK-abcdef",
+                        "str:attBuffTokenId": "str:ATT-abcdef",
+                        "str:healthPotTokenId": "str:HP-abcdef",
+                        "str:catcherTokenId": "str:CATCH-abcdef"
+                    },
+                    "code": "file:../output/slk-shop.wasm"
+                }
+            }
+        }
+    ]
+}

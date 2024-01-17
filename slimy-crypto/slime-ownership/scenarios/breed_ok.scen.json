@@ -1,0 +1,86 @@
+{
+    "name": "breed ok",
+    "gasSchedule": "dummy",
+    "steps": [
+        {
+            "step": "externalSteps",
+            "path": "setup_accounts.scen.json"
+        },
+        {
+            "step": "setState",
+            "currentBlockInfo": {
+                "blockTimestamp": "150,000",
+                "blockRandomSeed": "u8:189|u8:185|u64:0|u64:0|u64:0|u64:0|u64:0|u32:0|u16:0"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "tx-breed-ok",
+            "tx": {
+                "from": "address:my_address",
+                "to": "sc:slime_ownership_contract",
+                "function": "breedWith",
+                "arguments": [
+                    "2",
+                    "1"
+                ],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "u8:13|u8:8|u8:122|u8:51|u8:51|u8:56"
+                ],
+                "status": "0",
+                "message": "",
+                "logs": "*",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:acc1": {
+                    "nonce": "0",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "address:acc2": {
+                    "nonce": "0",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "address:acc3": {
+                    "nonce": "0",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "address:my_address": {
+                    "nonce": "3",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "sc:slime_ownership_contract": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {
+                        "str:geneScienceContractAddress": "sc:slime_genetic_alg",
+                        "str:totalSlimes": "4",
+                        "str:slime|u32:0": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:1": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:1|u16:0",
+                        "str:slime|u32:2": "u8:11|u8:5|u8:100|u8:17|u8:0|u8:0|u64:0|u32:0|u32:0|u16:1|u16:0",
+                        "str:slime|u32:3": "u8:13|u8:8|u8:122|u8:51|u8:51|u8:56|u64:150,000|u32:2|u32:1|u16:0|u16:1",
+                        "str:owner|u32:1": "address:acc1",
+                        "str:owner|u32:2": "address:acc2",
+                        "str:owner|u32:3": "address:acc2",
+                        "str:nrOwnedSlimes|address:acc1": "1",
+                        "str:nrOwnedSlimes|address:acc2": "2"
+                    },
+                    "code": "file:../output/slime-ownership.wasm"
+                },
+                "+": ""
+            }
+        }
+    ]
+}

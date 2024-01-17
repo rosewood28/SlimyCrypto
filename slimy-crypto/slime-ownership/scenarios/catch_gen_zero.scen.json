@@ -1,0 +1,136 @@
+{
+    "name": "catch gen zero",
+    "gasSchedule": "dummy",
+    "steps": [
+        {
+            "step": "externalSteps",
+            "path": "setup_accounts.scen.json"
+        },
+        {
+            "step": "setState",
+            "currentBlockInfo": {
+                "blockTimestamp": "150,000",
+                "blockRandomSeed": "u8:189|u8:185|u64:0|u64:0|u64:0|u64:0|u64:0|u32:0|u16:0"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "tx-gen-zero",
+            "tx": {
+                "from": "address:my_address",
+                "to": "sc:slime_ownership_contract",
+                "function": "createGenZeroSlime",
+                "arguments": [
+                    "address:acc1"
+                ],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "0"
+                ],
+                "status": "0",
+                "message": "",
+                "logs": "*",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "tx-gen-zero",
+            "tx": {
+                "from": "address:my_address",
+                "to": "sc:slime_ownership_contract",
+                "function": "createGenZeroSlime",
+                "arguments": [
+                    "address:acc1"
+                ],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "1"
+                ],
+                "status": "0",
+                "message": "",
+                "logs": "*",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "scCall",
+            "id": "tx-catch",
+            "tx": {
+                "from": "address:my_address",
+                "to": "sc:slime_ownership_contract",
+                "function": "catchSlime",
+                "arguments": [
+                    "address:acc1",
+                    "u32:1"
+                ],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "out": [
+                    "3"
+                ],
+                "status": "0",
+                "message": "",
+                "logs": "*",
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:acc1": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:acc2": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:acc3": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:my_address": {
+                    "nonce": "5",
+                    "balance": "1,000,000",
+                    "storage": {}
+                },
+                "sc:slime_ownership_contract": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {
+                        "str:geneScienceContractAddress": "sc:slime_genetic_alg",
+                        "str:totalSlimes": "4",
+                        "str:slime|u32:0": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:1": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:2": "u8:11|u8:5|u8:100|u8:17|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:3": "u8:20|u8:15|u8:168|u8:170|u8:170|u8:173|u64:150,000|u32:0|u32:0|u16:0|u16:0",
+                        "str:owner|u32:1": "address:acc1",
+                        "str:owner|u32:2": "address:acc2",
+                        "str:owner|u32:3": "address:acc1",
+                        "str:nrOwnedSlimes|address:acc1": "2",
+                        "str:nrOwnedSlimes|address:acc2": "1",
+                        "str:hunterAddress|u32:0":"address:acc1",
+                        "str:hunterAddress|u32:1":"address:acc1",
+                        "str:wildSlime|u32:0":"u8:20|u8:15|u8:168|u8:170|u8:170|u8:173|u64:150,000|u32:0|u32:0|u16:0|u16:0",
+                        "str:wildSlime|u32:1":"u8:20|u8:15|u8:168|u8:170|u8:170|u8:173|u64:150,000|u32:0|u32:0|u16:0|u16:0",
+                        "str:totalWildSlimes":"2"
+                    },
+                    "code": "file:../output/slime-ownership.wasm"
+                },
+                "+": ""
+            }
+        }
+    ]
+}

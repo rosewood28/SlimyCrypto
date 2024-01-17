@@ -1,0 +1,16 @@
+[package]
+name = "slime"
+version = "0.0.0"
+authors = ["SlimyCrypto"]
+edition = "2021"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies.multiversx-sc]
+version = "0.46.1"
+
+[dependencies.random]
+version = "0.0.0"
+path = "../random"

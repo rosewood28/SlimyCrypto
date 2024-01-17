@@ -1,0 +1,12 @@
+[package]
+name = "slk-shop-meta"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies.slk-shop]
+path = ".."
+
+[dependencies.multiversx-sc-meta]
+version = "0.46.1"
+default-features = false

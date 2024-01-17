@@ -1,0 +1,20 @@
+[package]
+name = "rust-interact"
+version = "0.0.0"
+authors = ["you"]
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "rust-interact"
+path = "src/interactor_main.rs"
+
+[dependencies.slime-ownership]
+path = ".."
+
+[dependencies.multiversx-sc-snippets]
+version = "0.46.1"
+
+# [workspace]
+
+

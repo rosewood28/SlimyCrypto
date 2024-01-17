@@ -1,0 +1,51 @@
+{
+    "name": "setup accounts and mock data",
+    "gasSchedule": "dummy",
+    "steps": [
+        {
+            "step": "externalSteps",
+            "path": "init.scen.json"
+        },
+        {
+            "step": "setState",
+            "accounts": {
+                "address:acc1": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:acc2": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:acc3": {
+                    "nonce": "0",
+                    "balance": "1,000,000"
+                },
+                "address:my_address": {
+                    "nonce": "2",
+                    "balance": "1,000,000"
+                },
+                "sc:slime_ownership_contract": {
+                    "owner": "address:my_address",
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {
+                        "str:geneScienceContractAddress": "sc:slime_genetic_alg",
+                        "str:totalSlimes": "3",
+                        "str:slime|u32:0": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:1": "u8:10|u8:5|u8:100|u8:0|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:slime|u32:2": "u8:11|u8:5|u8:100|u8:17|u8:0|u8:0|u64:0|u32:0|u32:0|u16:0|u16:0",
+                        "str:owner|u32:1": "address:acc1",
+                        "str:owner|u32:2": "address:acc2",
+                        "str:nrOwnedSlimes|address:acc1": "1",
+                        "str:nrOwnedSlimes|address:acc2": "1"
+                    },
+                    "code": "file:../output/slime-ownership.wasm"
+                }
+            },
+            "currentBlockInfo": {
+                "blockTimestamp": "100,000"
+            }
+        }
+    ]
+}

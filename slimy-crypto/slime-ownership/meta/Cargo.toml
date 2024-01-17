@@ -1,0 +1,12 @@
+[package]
+name = "slime-ownership-meta"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies.slime-ownership]
+path = ".."
+
+[dependencies.multiversx-sc-meta]
+version = "0.46.1"
+default-features = false

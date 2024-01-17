@@ -1,0 +1,18 @@
+[package]
+name = "egld-slk-swap-sc"
+version = "0.0.0"
+authors = ["SlimyCrypto"]
+edition = "2021"
+description = "Smart Contract that swaps EGLD for SLK. 1 SLK = 0.0002 EGLD."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies.multiversx-sc]
+version = "0.46.1"
+
+[dependencies.multiversx-sc-modules]
+version = "0.46.1"
+
+[dev-dependencies.multiversx-sc-scenario]
+version = "0.46.1"

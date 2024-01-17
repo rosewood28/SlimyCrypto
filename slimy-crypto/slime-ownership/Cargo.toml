@@ -1,0 +1,27 @@
+[package]
+name = "slime-ownership"
+version = "0.0.0"
+authors = ["SlimyCrypto"]
+edition = "2021"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies.slime]
+version = "0.0.0"
+path = "../common/slime"
+
+[dependencies.random]
+version = "0.0.0"
+path = "../common/random"
+
+[dependencies.slime-genetic-alg]
+version = "0.0.0"
+path = "../slime-genetic-alg"
+
+[dependencies.multiversx-sc]
+version = "0.46.1"
+
+[dev-dependencies.multiversx-sc-scenario]
+version = "0.46.1"
